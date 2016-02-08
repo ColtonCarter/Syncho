@@ -1,0 +1,35 @@
+If you think of any other fields that might be needed, feel free to add them
+
+User Database
+Field		Object Type
+-----------------------------------
+Username	String (Must be unique)
+Password	String (Encryption)
+UserID		Integer (On Generation: Unique, arbitrary)
+DateReg		Date
+ListPosts	Database (List of all posts; sort by date; pulls from all internal via PosterID)
+PostCount	Integer
+Score		Integer (Total of post votes?)
+
+==============================================================================================================
+
+External (Layered) - Database containing databases, for use with webpage(s) to select an internal catagory.
+Field		Object Type
+-----------------------------------
+Catagory	Database
+
+==============================================================================================================
+
+Internal - After catagory selection, posts within that database will display the following entries
+Fields		Object Type
+-----------------------------------
+PostContents	Generic Object
+VoteCount	Integer
+RecentVotes	Integer (Starts at 0. Decays by X after Y time interval [min 0]. For use with 'Trending' feature.)
+Username	String
+DatePosted	Date
+isArchived	Boolean (For old posts)
+timesEdited	Integer (Starts at 0)
+lastEditDate	Date
+PosterID	Integer (Copy of UserID for referance)
+PostID		String (On Generation: Unique, Arbitrary)
