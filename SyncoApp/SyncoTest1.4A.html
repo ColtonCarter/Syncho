@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Synco -- FrontPage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type = "text/css" href="SyncoCss1.3.css">
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="syncoCtrl">
+<div class="container-fluid">
+  <div>
+    <img src="SyncoImgName.png" alt="Synco" height ="100" width="200">
+  </div>
+  <br
+  <div class ="row">
+    <div class="col-sm-3 col-xs-0"></div>
+    <div class="col-sm-6 col-xs-12" >
+        <nav class="flex-nav">
+          <ul>
+            <li><a href = "#"> Recent Posts</a></li>
+            <li><a href = "#"> Messages </a></li>
+            <li><a href = "#"> Add a Post </a></li>
+            <li><a href = "#"> Login/Register </a></li>
+
+          </ul>
+          <div class ="panel panel default">
+
+            <div class="panel-heading"> <h1> Recent Posts </h1> </div>
+            <div class ="commentMain">
+
+
+                  <div class = "commentMain" ng-repeat="x in posts | limitTo:howMany">
+	                      <div class="commentTitle"> <h3> {{ x.about.title }} </h3></div>
+	                      <div class="commentBody" >      {{ x.about.ptext }} </div>
+	                       <div class="commentFooter"> Comments : {{ x.about.num_comments }}
+	                                                   Upvotes  : {{ x.about.upvotes }}
+	                                                   Downvotes: {{ x.about.downvotes }}
+	                                                   Score : {{ x.about.post_score }}
+                                    <a class = "commentReply" href = "#"> reply </a>
+	                       </div>
+
+              </div>
+            </div>
+    </div>
+    <div class="col-sm-3 col-xs-0"></div>
+  </div>
+</div>
+</div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('syncoCtrl', function($scope, $http)
+	{
+		$http.get("http://www.synco.xyz/api/v1/posts")
+	  	.then(function (response)
+	  	{
+	 		$scope.posts = response.data;
+
+	    });
+	    });
+</script>
+</html>
